@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-    <p>
-        {{text }} <!--değişken oluşturma-->  <!-- |raw, htmli yapar-->
-    </p>
+{% extends "homebase.html" %}
 
-</body>
-</html>
+{% block title %}İndex Sayfasi{% endblock %}
+{% block keywords %}İndex Sayfasi Anahtar Kelimeler{% endblock %}
+{% block description %}İndex Sayfasi Açiklama{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
+
+{% block slider %}
+    {% include "slider.html" %}
+{% endblock %}
+
+{% block body %}
+    {% include "content.html" %}
+{% endblock %}
