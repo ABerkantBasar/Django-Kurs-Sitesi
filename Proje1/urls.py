@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -23,5 +25,8 @@ urlpatterns = [
     path('product/', include('product.urls')),    #product/ yazıldığı zaman product a git
     path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG: #new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
