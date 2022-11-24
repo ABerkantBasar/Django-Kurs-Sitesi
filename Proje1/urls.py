@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),               #hiçbirşey yazılmadığı zaman home a git
     path('home/', include('home.urls')),          #home/ yazıldığı zaman home a git
     path('product/', include('product.urls')),    #product/ yazıldığı zaman product a git
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
 ]
 

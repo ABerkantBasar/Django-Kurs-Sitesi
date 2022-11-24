@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import  RichTextUploadingField
 
 class Category(models.Model):
     STATUS=(
@@ -35,6 +36,7 @@ class Course(models.Model):
     price=models.FloatField()
     detail=models.TextField()              #RichTextUploadingField()
     status=models.CharField(max_length=10,choices=STATUS)
+    detail=RichTextUploadingField()
 
     #slug=models.SlugField()     #id gibi ama metin 
     #parent=models.ForeignKey('self',blank=True,null=True,related_name='lesson',on_delete=models.CASCADE)

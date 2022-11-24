@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from home.models import Setting
 
 def index(request):
-    text="Hello, world. You're at the home index.<br>merhaba<br>naber"
-    context = {'text': text}
+    setting=Setting.objects.get(pk=1)
+    context = {'setting': setting}
     return render(request, 'indexhome.html', context)
