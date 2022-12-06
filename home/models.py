@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import  RichTextUploadingField
+from django.forms import ModelForm, TextInput, Textarea
 
 
 class Setting(models.Model): 
@@ -29,7 +30,7 @@ class Setting(models.Model):
     pinterest=models.CharField(blank=True,max_length=150)
     instagram=models.CharField(blank=True,max_length=50)
     twitter=models.CharField(blank=True,max_length=50)
-    telegram=models.CharField(blank=True,max_length=50)
+    linkedin=models.CharField(blank=True,max_length=50)
 
     aboutus=RichTextUploadingField(blank=True,)
     contact=RichTextUploadingField(blank=True,)
@@ -40,5 +41,36 @@ class Setting(models.Model):
     update_at=models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.title  
+
+
+class ContactFormMessage(models.Model): 
+    STATUS=(
+        ('True','Evet'),
+        ('False','Hayir'),
+    ) 
+    name=models.CharField(max_length=150) 
+    email=models.CharField(blank=True,max_length=50)
+    phone=models.CharField(blank=True,max_length=15)
+    subject=models.CharField(blank=True,max_length=50)
+    message=models.CharField(blank=True,max_length=255)
+    status=models.CharField(max_length=10,choices=STATUS,default='New')
+    ip=models.CharField(blank=True,max_length=20)
+    note=models.CharField(blank=True,max_length=100)
+    crate_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title 
+
+class ContactFormu(ModelForm): 
+   class Meta:
+    model=ContactFormMessage
+    fields=['name','email','subject','message']
+    widgets={
+        'name':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Adınız & Soyadınız'}),
+        'subject': TextInput(attrs={'class':'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Konu'}),
+        'email':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Email Adresiniz'}),
+        'message':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Mesajınız','rows':'5'}),
+    }
       
     

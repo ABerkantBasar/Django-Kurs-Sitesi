@@ -1,0 +1,40 @@
+{% extends "homebase.html" %}
+
+{% load static%}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
+
+{% block slider %}
+    {% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+<section class="bg0 p-t-75 p-b-120">
+    <div class="container">
+        <div class="row p-b-148">
+            <div class="col-md-7 col-lg-8">
+                <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+                    <p class="stext-113 cl6 p-b-26">
+                        {{ setting.aboutus|safe }}
+                    </p>
+                </div>
+            </div>
+                <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+                    <p class="stext-113 cl6 p-b-26">
+                        {{ setting.references|safe }}
+                    </p>
+                </div>
+            </div>
+        </div>
+</section>	
+{% endblock %}

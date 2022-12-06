@@ -18,12 +18,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from home import views
 
 urlpatterns = [
     path('', include('home.urls')),               #hiçbirşey yazılmadığı zaman home a git
     path('home/', include('home.urls')),          #home/ yazıldığı zaman home a git
-    path('product/', include('product.urls')),    #product/ yazıldığı zaman product a git
+    #path('product/', include('product.urls')),    #product/ yazıldığı zaman product a git
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('blog/', views.blog, name='blog'),
+    path('faq/', views.faq, name='faq'),
+    path('product/', views.product, name='product'),
     path('admin/', admin.site.urls),
 ]
 
