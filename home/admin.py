@@ -7,6 +7,6 @@ class SettingAdmin(admin.ModelAdmin):
 admin.site.register(Setting,SettingAdmin)
 
 class ContactFormMessageAdmin(admin.ModelAdmin):
-    list_display=['name','email','subject', 'status']
+    list_display=['name','subject','note','status', 'message']
     list_filter=['status']      #filtreleme ypar
 admin.site.register(ContactFormMessage,ContactFormMessageAdmin)

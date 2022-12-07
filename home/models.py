@@ -45,8 +45,9 @@ class Setting(models.Model):
 
 class ContactFormMessage(models.Model): 
     STATUS=(
-        ('True','Evet'),
-        ('False','Hayir'),
+        ('Okundu','Okundu'),
+        ('Okunmadı','Okunmadı'),
+        ('Çözüldü','Çözüldü'),
     ) 
     name=models.CharField(max_length=150) 
     email=models.CharField(blank=True,max_length=50)
@@ -60,16 +61,17 @@ class ContactFormMessage(models.Model):
     update_at=models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title 
+        return self.name 
 
 class ContactFormu(ModelForm): 
    class Meta:
     model=ContactFormMessage
-    fields=['name','email','subject','message']
+    fields=['name','email','phone','subject','message',]
     widgets={
         'name':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Adınız & Soyadınız'}),
         'subject': TextInput(attrs={'class':'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Konu'}),
         'email':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Email Adresiniz'}),
+        'phone':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Telefonunuz'}),
         'message':TextInput(attrs={'class': 'stext-111 cl2 plh3 size-116 p-l-62 p-r-30','placeholder':'Mesajınız','rows':'5'}),
     }
       
