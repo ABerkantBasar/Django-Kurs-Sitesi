@@ -2,12 +2,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from home.models import Setting, ContactFormMessage, ContactFormu
 from django.contrib import messages
-from product.models import Course
+from product.models import Course,Category
 
 def index(request):
     setting=Setting.objects.get(pk=1)
     sliderdata=Course.objects.all()[:10]
-    context = {'setting': setting, 'page':'home','sliderdata':sliderdata}
+    category=Category.objects.all()
+    context = {'setting': setting, 'page':'home','sliderdata':sliderdata,'category':category}
     return render(request, 'indexhome.html', context)
 
 def about(request):

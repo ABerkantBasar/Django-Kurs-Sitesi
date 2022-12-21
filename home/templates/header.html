@@ -34,12 +34,22 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
+                        
                         <li class="active-menu">
                             <a href="/home">Kategoriler</a>
                             <ul class="sub-menu">
-                                <li><a href="/home">Kodlama</a></li>
-                                <li><a href="/home">Dil</a></li>
-                                <li><a href="/home">Spor</a></li>
+                                {% load mptt_tags %}
+
+                                    {% recursetree category %}
+                                        <li><h6>
+                                            {{ node.title }}
+                                            {% if not node.is_leaf_node %}
+                                                <ul class="children">
+                                                    <li><a href="/children">{{ children }}</a></li>
+                                                </ul>
+                                            {% endif %}
+                                        </h6></li>
+                                    {% endrecursetree %}
                             </ul>
                         </li>
                         <li class="active-menu">
@@ -69,10 +79,6 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
-
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                        <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
                 </div>
             </nav>
         </div>	
@@ -94,10 +100,6 @@
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
-
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-                <i class="zmdi zmdi-favorite-outline"></i>
-            </a>
         </div>
 
         <!-- Button show menu -->
@@ -134,11 +136,21 @@
         <ul class="main-menu-m">
             <li>
                 <a href="/home">Kategoriler</a>
-					<ul class="sub-menu-m">
-						<li><a href="/home">Kodlama</a></li>
-						<li><a href="/home">Dil</a></li>
-						<li><a href="/home">Spor</a></li>
-					</ul>
+                <a href="/home">Kategoriler</a>
+                <ul class="sub-menu-m">
+                    {% load mptt_tags %}
+
+                        {% recursetree category %}
+                            <li><h6>
+                                {{ node.title }}</h6>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="children">
+                                        <li><a href="/children">{{ children }}</a></li>
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                </ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>

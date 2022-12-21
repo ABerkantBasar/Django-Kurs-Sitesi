@@ -23,6 +23,7 @@ class Category(MPTTModel):
     parent=TreeForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name='children')
 
     class MPTTMeta:
+        #level_attr = 'mptt_level'
         order_insertion_by=['title']
     def __str__(self):
         full_path =[self.title]
@@ -30,7 +31,7 @@ class Category(MPTTModel):
         while k is not None:
             full_path.append(k.title)
             k=k.parent
-        return ' >>>> '.join(full_path[::-1])    
+        return ' / '.join(full_path[::-1])    
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     
