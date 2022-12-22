@@ -5,15 +5,17 @@ from django.contrib import messages
 from product.models import Course,Category
 
 def index(request):
+    category=Category.objects.all
     setting=Setting.objects.get(pk=1)
     sliderdata=Course.objects.all()[:10]
-    category=Category.objects.all()
-    context = {'setting': setting, 'page':'home','sliderdata':sliderdata,'category':category}
+    selected_category=Category.objects.all()
+    context = {'setting': setting, 'page':'home','sliderdata':sliderdata,'category':category,'selected_category':selected_category}
     return render(request, 'indexhome.html', context)
 
 def about(request):
     setting=Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page':'about'}
+    category=Category.objects.all()
+    context = {'setting': setting, 'page':'about','category':category}
     return render(request, 'about.html', context)
 
 def contact(request):
@@ -30,25 +32,30 @@ def contact(request):
             data.save()
             messages.success(request,"Mesajınız Başarı İle Gönderilmiştir")
             return HttpResponseRedirect('/contact')
-    
+    category=Category.objects.all()
     setting= Setting.objects.get(pk=1)
     form= ContactFormu()
-    context={'setting':setting,'form':form}
+    context={'setting':setting,'form':form,'category':category}
     return render(request,'contact.html',context)
- 
-
-def blog(request):
-    setting=Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page':'blog'}
-    return render(request, 'blog.html', context)
 
 def faq(request):
     setting=Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page':'faq'}
+    category=Category.objects.all()
+    context = {'setting': setting, 'page':'faq','category':category}
     return render(request, 'faq.html', context)
 
 def product(request):
     setting=Setting.objects.get(pk=1)
+    category=Category.objects.all()
     sliderdata=Course.objects.all()[:10]
-    context = {'setting': setting, 'page':'product','sliderdata':sliderdata}
+    context = {'setting': setting, 'page':'product','sliderdata':sliderdata,'category':category}
     return render(request, 'product.html', context)
+
+def category_products(request,id,slug):
+    category=Category.objects.all
+    sliderdata=Course.objects.all()[:10]
+    setting=Setting.objects.get(pk=1)
+    selected_category=Category.objects.filter(pk=id)
+    product=Course.objects.filter(category_id=id)
+    context={'setting': setting,'product':product,'category':category,'sliderdata':sliderdata,'selected_category':selected_category}
+    return render(request,'product.html',context)

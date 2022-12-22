@@ -41,14 +41,14 @@
                                 {% load mptt_tags %}
 
                                     {% recursetree category %}
-                                        <li><h6>
-                                            {{ node.title }}
+                                        <li class="active-menu"><a href="/category/{{node.id}}/{{node.slug}}" class="active-menu">
+                                            {{ node.title }}</a>
                                             {% if not node.is_leaf_node %}
-                                                <ul class="children">
-                                                    <li><a href="/children">{{ children }}</a></li>
+                                                <ul class="sub-menu">
+                                                    <li><a class="active-menu" href="/category/{{children.slug}}">{{ children }}</a></li><br>
                                                 </ul>
                                             {% endif %}
-                                        </h6></li>
+                                        </li>
                                     {% endrecursetree %}
                             </ul>
                         </li>
@@ -136,20 +136,21 @@
         <ul class="main-menu-m">
             <li>
                 <a href="/home">Kategoriler</a>
-                <a href="/home">Kategoriler</a>
                 <ul class="sub-menu-m">
                     {% load mptt_tags %}
 
-                        {% recursetree category %}
-                            <li><h6>
-                                {{ node.title }}</h6>
-                                {% if not node.is_leaf_node %}
-                                    <ul class="children">
-                                        <li><a href="/children">{{ children }}</a></li>
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        {% endrecursetree %}
+                                    {% recursetree category %}
+                                    
+                                        <li class="active-menu-m"><a href="/category/{{node.slug}}" class="active-menu-m">
+                                            {{ node.title }}</a>
+                                            {% if not node.is_leaf_node %}
+                                                <ul class="sub-menu-m">
+                                                    <li><a class="active-menu-m"  href="/category/{{children.slug}}">{{ children }}</a></li><br>
+                                                </ul>
+                                                
+                                            {% endif %}
+                                        </li>
+                                    {% endrecursetree %}
                 </ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
