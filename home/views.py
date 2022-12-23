@@ -9,7 +9,15 @@ def index(request):
     setting=Setting.objects.get(pk=1)
     sliderdata=Course.objects.all()[:10]
     selected_category=Category.objects.all()
-    context = {'setting': setting, 'page':'home','sliderdata':sliderdata,'category':category,'selected_category':selected_category}
+    course_data=Course.objects.all().order_by('?')
+
+    context = {'setting': setting, 
+                'page':'home',
+                'sliderdata':sliderdata,
+                'category':category,
+                'selected_category':selected_category,
+                'course_data':course_data}
+
     return render(request, 'indexhome.html', context)
 
 def about(request):
@@ -48,7 +56,8 @@ def product(request):
     setting=Setting.objects.get(pk=1)
     category=Category.objects.all()
     sliderdata=Course.objects.all()[:10]
-    context = {'setting': setting, 'page':'product','sliderdata':sliderdata,'category':category}
+    course_data=Course.objects.all().order_by('?')
+    context = {'setting': setting, 'sliderdata':sliderdata,'category':category,'course_data':course_data}
     return render(request, 'product.html', context)
 
 def category_products(request,id,slug):
@@ -58,4 +67,4 @@ def category_products(request,id,slug):
     selected_category=Category.objects.filter(pk=id)
     product=Course.objects.filter(category_id=id)
     context={'setting': setting,'product':product,'category':category,'sliderdata':sliderdata,'selected_category':selected_category}
-    return render(request,'product.html',context)
+    return render(request,'category.html',context)

@@ -1,15 +1,24 @@
-<!-- Banner -->
-{% load static%}
+{% extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
 
 
-
-
-<!-- Product -->
-<section class="bg0 p-t-23 p-b-140">
+{% block content %}
+    <!-- Product -->
+<section class="bg0 p-t-80 p-b-50">
     <div class="container">
         <div class="p-b-10">
             <h3 class="ltext-103 cl5">
-                <br><br><br><br>
                 Kurslarımız
             </h3>
         </div>
@@ -17,7 +26,7 @@
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
+                    Tüm Kurslar
                 </button>
 
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
@@ -257,7 +266,7 @@
         </div>
         
         <div class="row isotope-grid">
-            {% for rs in course_data %}
+            {% for rs in product %}
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 
@@ -290,6 +299,7 @@
             </div>
             
             {% endfor %}
-        </div>
     </div>
+    
 </section>
+{% endblock %}
