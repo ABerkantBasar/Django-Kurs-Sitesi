@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Category, Course, Images, Course
+from product.models import Category, Course, Images, Course,Video
 from mptt.admin import MPTTModelAdmin,DraggableMPTTAdmin
 from django.utils.html import format_html
 
@@ -10,6 +10,7 @@ class CategoryAdmin(MPTTModelAdmin):
     readonly_fields =('image_tag',)
     list_display=['title', 'status','image_tag']
     list_filter=['status']      #filtreleme ypar
+    prepopulated_fields={'slug':('title',)}
 
 
 class CourseImageInline(admin.TabularInline):
@@ -21,6 +22,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_display=['title', 'status','price','category','image_tag']
     list_filter=['status','category']      #filtreleme ypar
     inlines=[CourseImageInline]
+    prepopulated_fields={'slug':('title',)}
     
 
 
@@ -63,6 +65,13 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.products_cumulative_count
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
+
+
+    
+
+
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Course,CourseAdmin)
 admin.site.register(Images,ImagesAdmin)
+
+admin.site.register(Video)

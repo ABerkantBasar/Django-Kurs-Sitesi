@@ -1,29 +1,46 @@
 <!-- Header -->
 {% load static%}
 <header>
+    
     <!-- Header desktop -->
     <div class="container-menu-desktop">
+        
         <!-- Topbar -->
         <div class="top-bar">
+        
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
                     İndirimli Fiyatlarımızı Kaçırmayın
                 </div>
 
-                <div class="right-top-bar flex-w h-full">
+                <ul class="right-top-bar flex-w h-full">
                     <a href="/faq" class="flex-c-m trans-04 p-lr-25">
                         Yardım & Sorular
                     </a>
-
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Hesabım
+                    
+                    {%if user.id is not None%}
+                    
+                    
+                    <a href="/home" class="flex-c-m trans-04 p-lr-25">
+                        {{user.first_name}} {{user.last_name}}
                     </a>
-
+                    <a href="/logout" class="flex-c-m trans-04 p-lr-25">
+                        Çıkış Yapın
+                    </a>
+                    {%else%}
+                    <a href="/login" class="flex-c-m trans-04 p-lr-25">
+                        Giriş Yapın
+                    </a>
+                    {%endif%}
+                    </ul>
                 </div>
             </div>
         </div>
-
+        {% if request.user_agent.is_mobile %}
+            <br>
+        {%else%}
         <div class="wrap-menu-desktop">
+            
             <nav class="limiter-menu-desktop container">
                 
                 <!-- Logo desktop -->		
@@ -81,8 +98,12 @@
                     </div>
                 </div>
             </nav>
-        </div>	
+            
+        </div>
+        {%endif%}
+          	
     </div>
+    
 
     <!-- Header Mobile -->
     <div class="wrap-header-mobile">
@@ -126,9 +147,18 @@
                         Yardım & Sorular
                     </a>
 
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        Hesabım
+                    {%if user.id is not None%}
+                    <a href="/home" class="flex-c-m p-lr-10 trans-04">
+                        {{user.first_name}} {{user.last_name}}
                     </a>
+                    <a href="/logout" class="flex-c-m p-lr-10 trans-04">
+                        Çıkış Yapın
+                    </a>
+                    {%else%}
+                    <a href="/login" class="flex-c-m p-lr-10 trans-04">
+                        Giriş Yapın
+                    </a>
+                    {%endif%}
                 </div>
             </li>
         </ul>

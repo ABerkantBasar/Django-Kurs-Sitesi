@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import include, path
 from home import views
 
+
 urlpatterns = [
     path('', include('home.urls')),               #hiçbirşey yazılmadığı zaman home a git
     path('home/', include('home.urls')),          #home/ yazıldığı zaman home a git
@@ -31,6 +32,8 @@ urlpatterns = [
     path('product/', views.product, name='product'),
     path('admin/', admin.site.urls),
     path('category/<int:id>/<slug:slug>/', views.category_products, name='category_products'),
+    path('product/<int:id>/<slug:slug>/', views.product_details, name='product_detail'),
+    path('product/addcomment/<int:id>/', views.addcomment, name='addcomment'),
 ]
 
 if settings.DEBUG: #new

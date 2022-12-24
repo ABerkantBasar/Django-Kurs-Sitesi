@@ -2,6 +2,10 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import  RichTextUploadingField
 from mptt.models import MPTTModel, TreeForeignKey
+from django.forms import ModelForm, TextInput, Textarea
+from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 
 
@@ -16,7 +20,7 @@ class Category(MPTTModel):
     image=models.ImageField(blank=True,upload_to='images/')
     status=models.CharField(max_length=10,choices=STATUS)
 
-    slug=models.SlugField()     #id gibi ama metin 
+    slug=models.SlugField(null=False,unique=True)     #id gibi ama metin 
 
     crate_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now=True)
@@ -34,7 +38,10 @@ class Category(MPTTModel):
         return ' / '.join(full_path[::-1])    
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
-    
+    def get_absolute_url(self):
+        return reverse('Category',kwargs={'slug':self.slug})
+
+
 class Course(models.Model):
     STATUS=(
         ('True','Evet'),
@@ -44,10 +51,9 @@ class Course(models.Model):
     title=models.CharField(max_length=150)
     description=models.CharField(max_length=255)
     keywords=models.CharField(max_length=255)
-    slug=models.SlugField()
+    slug=models.SlugField(null=False,unique=True)
     image=models.ImageField(blank=True,upload_to='images/')
     price=models.FloatField()
-    detail=models.TextField()              #RichTextUploadingField()
     status=models.CharField(max_length=10,choices=STATUS)
     detail=RichTextUploadingField()
 
@@ -72,6 +78,10 @@ class Course(models.Model):
             #breadcrumb.append(k.slug)
             #k=k.parent
 
+    def get_absolute_url(self):
+        return reverse('Course',kwargs={'slug':self.slug})
+
+
 class Images(models.Model):
     course=models.ForeignKey(Course,on_delete=models.CASCADE)
     title=models.CharField(max_length=150)
@@ -80,5 +90,16 @@ class Images(models.Model):
         return self.title
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
     
+
+class Video(models.Model):
+    title=models.CharField(max_length=150)
+    video=models.FileField(upload_to='videos/')
+    def __str__(self):
+        return self.title
+    
+
+
+        
     
