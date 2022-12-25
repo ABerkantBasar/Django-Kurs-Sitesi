@@ -1,0 +1,91 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+<br><br><br><br><br><br>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a href="#">
+                  <img src="{{user.image.url}}" alt="">
+              </a>
+              <h1>{{ user.user.first_name }} {{ user.user.last_name }}</h1>
+              <p>{{user.user.email}}</p>
+          </div>
+
+          <ul class="nav nav-pills nav-stacked">
+            <br><br><br>
+              <li class="active"><a href="/user"> <i class="fa fa-user"></i>  Profil  </a></li>
+              <br>
+              <li><a href="#">  <i class="fa fa-shopping-basket"></i>  Sepet  </a></li>
+              <br>
+              <li><a href="/logout"> <i class="fa fa-sign-out"></i>  Çıkış Yap  </a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="profile-info col-md-9">
+      <div class="panel">
+          
+          
+      </div>
+      <div class="panel">
+          
+          <div class="panel-body bio-graph-info">
+            
+              <h1>Detaylar</h1>
+              <br>
+              <div class="row">
+                  <div class="bio-row">
+                      <p><span><b>Ad </b></span><b>:</b> {{ user.user.first_name }} </p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span><b>Soyad</b> </span><b>:</b>{{ user.user.last_name }} </p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span><b>Ülke</b> </span><b>:</b> {{ user.country }} </p>
+                  </div>
+                  <div class="bio-row">
+                    <p><span><b>Şehir</b> </span><b>:</b> {{ user.city }} </p>
+                  </div>
+                  <div class="bio-row">
+                    <p><span><b>Email</b> </span><b>:</b> {{user.user.email}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span><b>Katılma Tarihi</b></span><b>:</b> {{ user.user.date_joined}}</p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span><b>Son Giriş Tarihi</b> </span><b>:</b>{{ user.user.last_login}}</p>
+                  </div>
+                  
+                  <div class="bio-row">
+                      <p><span><b>Telefon</b> </span><b>:</b> {{user.phone}}</p>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+      
+  </div>
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+    
+{% endblock %}
+
+

@@ -32,8 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'product.apps.ProductConfig', #product app ekle
     'home.apps.HomeConfig',
+    'user.apps.UserConfig',
     'django_light',       #home app ekle
     'django.contrib.admin',
     'django.contrib.auth',

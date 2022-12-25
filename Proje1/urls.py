@@ -24,16 +24,23 @@ from home import views
 urlpatterns = [
     path('', include('home.urls')),               #hiçbirşey yazılmadığı zaman home a git
     path('home/', include('home.urls')),          #home/ yazıldığı zaman home a git
-    #path('product/', include('product.urls')),    #product/ yazıldığı zaman product a git
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('user/', include('user.urls')), 
+    
+    
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('faq/', views.faq, name='faq'),
     path('product/', views.product, name='product'),
+    
+
     path('admin/', admin.site.urls),
     path('category/<int:id>/<slug:slug>/', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>/', views.product_details, name='product_detail'),
     path('product/addcomment/<int:id>/', views.addcomment, name='addcomment'),
+    path('logout/', views.logout_view, name='logout_view'),
+    path('login/', views.login_view, name='login_view'),
+    path('search/', views.product_search, name='product_search'),
 ]
 
 if settings.DEBUG: #new

@@ -1,8 +1,6 @@
 {% extends "homebase.html" %}
 
-{% load static%}
-
-{% block title %} Sıkça Sorulan Sorular {% endblock %}
+{% block title %} Arama Sonuçları {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 
@@ -10,16 +8,15 @@
 <link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
 {% endblock %}
 
-
-
 {% block content %}
-  <!-- Product -->
+
+    <!-- Product -->
 <section class="bg0 p-t-23 p-b-140">
     <div class="container">
         <div class="p-b-10">
             <h3 class="ltext-103 cl5">
                 <br><br><br><br>
-                Sıkça Sorulan Sorular
+                Arama Sonuçları
             </h3>
         </div>
 
@@ -30,23 +27,33 @@
                 
                 <div class="block2">
                     
-                    <table cellpadding="3" width="1200" role="table">
+                    <table cellpadding="3" width="1200">
                         <tr>
+                            <th></th><br>
+                            <th></th><br>
                             <th></th><br>
                             <th></th><br>
                         </tr>
                         
-                        {%for rs in faq%}
+                        {%for rs in product%}
                             <tr>
-                                <td data-label="Soru">
+                                
+                                <td>
                                     <br><br><br><br>
-                                    <h4 class="product-name"><b>{{rs.question}}</b><br><br></h4>
+                                    <a href="/product/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" ></a>
                                     <br><br><br><br>
                                 </td>
-                                
 
-                                <td data-label="Cevap">
-                                    <h4 class="product-name"> {{rs.answer}}<br><br><br><br></h4>
+                                <td>
+                                    <h4 class="product-name"><a href="/product/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h4>
+                                </td>
+
+                                <td>
+                                    <a href="/category/{{rs.category.id}}/{{rs.category.slug}}">{{rs.category}}</a>
+                                </td>
+
+                                <td>
+                                    <h4>{{rs.price}} TL</h4>
                                 </td>
                                 
                             </tr>
@@ -62,5 +69,7 @@
             
         </div>
     </div>
-</section>	
+</section>
+
+
 {% endblock %}
