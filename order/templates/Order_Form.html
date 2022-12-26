@@ -1,0 +1,99 @@
+{% extends "homebase.html" %}
+
+{% block title %} Satın Al {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block content %}
+
+<section class="bg0 p-t-104 p-b-116">
+    <div class="container">
+        
+        <form action="" method="post">
+            {% csrf_token %}
+        <div class="flex-w flex-tr">
+            
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Kullanıcı Bilgileri
+                    </h4>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Ad:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="first_name" value="{{user.first_name}}">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">SoyAd:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="last_name" value="{{user.last_name}}">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Adres:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="adress" value="{{profile.adress}}">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Telefon:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="phone" value="{{profile.phone}}">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Şehir:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="city" value="{{profile.city}}">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Ülke:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="country" value="{{profile.country}}">
+                    </div>
+                
+            </div>
+
+            <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Ödeme ve Kart Bilgileri
+                    </h4>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Toplam:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="total" value="{{total}} TL">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Kart Sahibi:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="holder" value="">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Kart Numarası:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="holder" value="">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Kart Son Kullanma Tarihi:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="holder" value="">
+                    </div>
+
+                    <h4 class="mtext-105 cl2 txt-left p-b-30">Kart Güvenlik Numarası:</h4>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="holder" value="">
+                    </div>
+                    <br><br>
+                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
+                        Satın Alma İşlemini Tamamla
+                    </button>
+                
+            </div>
+        </div>
+    </form>
+    </div>
+</section>
+
+{% endblock %}

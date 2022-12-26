@@ -5,6 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 from django.contrib.auth.models import User
 from product.models import Course
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 

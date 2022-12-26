@@ -1,0 +1,70 @@
+{% extends "homebase.html" %}
+
+{% block title %} Alışveriş Sepeti {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block content %}
+<form class="bg0 p-t-75 p-b-85">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+                    <div class="wrap-table-shopping-cart">
+                        <table class="table-shopping-cart">
+                            <tr class="table_head">
+                                <th class="column-1">Kurs</th>
+                                <th class="column-2"></th>
+                                <th class="column-3">Fiyatı</th>
+                                <th class="column-4"></th>
+                            </tr>
+                            {%for rs in scart%}
+                            <tr class="table_row">
+                                <td class="column-1">
+                                    <div class="how-itemcart1">
+                                        <img src="{{rs.product.image.url}}" alt="IMG">
+                                    </div>
+                                </td>
+                                <td class="column-2">{{rs.product.title}}</td>
+                                <td class="column-3">{{rs.product.price}} TL</td>
+                                <td class="column-4"><a href="/order/deletefromcart/{{rs.id}}">Sepetten Çıkarın</a></td>
+                                </td>
+                            </tr>
+                            {%endfor%}
+
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                    <div class="flex-w flex-t p-t-27 p-b-33">
+                        <div class="size-208">
+                            <span class="mtext-101 cl2">
+                                Toplam:
+                            </span>
+                        </div>
+
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2">
+                                {{total}} TL
+                            </span>
+                        </div>
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <a href="/order/orderproduct/" style="color: white;">Satın Al</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

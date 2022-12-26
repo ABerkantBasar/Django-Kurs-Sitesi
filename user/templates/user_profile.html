@@ -1,6 +1,6 @@
 {% extends "homebase.html" %}
 
-{% block title %} {{ setting.title }} {% endblock %}
+{% block title %} {{ user.user.first_name }}{{ user.user.last_name }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 
@@ -31,9 +31,9 @@
 
           <ul class="nav nav-pills nav-stacked">
             <br><br><br>
-              <li class="active"><a href="/user"> <i class="fa fa-user"></i>  Profil  </a></li>
+              <li><a href="/user"> <i class="fa fa-user"></i>  Profil  </a></li>
               <br>
-              <li><a href="#">  <i class="fa fa-shopping-basket"></i>  Sepet  </a></li>
+              <li><a href="/user/orders/">  <i class="fa fa-shopping-basket"></i>  Ürünler  </a></li>
               <br>
               <li><a href="/logout"> <i class="fa fa-sign-out"></i>  Çıkış Yap  </a></li>
           </ul>

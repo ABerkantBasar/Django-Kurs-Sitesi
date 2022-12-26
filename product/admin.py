@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Category, Course, Images, Course,Video
+from product.models import Category, Course, Images, Course,Video,Slider
 from mptt.admin import MPTTModelAdmin,DraggableMPTTAdmin
 from django.utils.html import format_html
 
@@ -66,12 +66,14 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
 
-
+class SliderAdmin(admin.ModelAdmin):
+    list_display=['title','image_tag']
     
 
 
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Course,CourseAdmin)
+admin.site.register(Slider,SliderAdmin)
 admin.site.register(Images,ImagesAdmin)
 
 admin.site.register(Video)

@@ -1,0 +1,68 @@
+{% extends "homebase.html" %}
+
+{% block title %} Satın Alınmış Kurslar {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+ <!-- Product -->
+ <section class="bg0 p-t-23 p-b-140">
+    <div class="container">
+        <div class="p-b-10">
+            <h3 class="ltext-103 cl5">
+                <br><br><br><br>
+                Kurslarınız
+                <br><br><br>
+                
+            </h3>
+        </div>
+        
+        <div class="header-cart-content flex-w js-pscroll">
+            <ul class="header-cart-wrapitem w-full">
+                {%for rs in orders%}
+                <li class="header-cart-item flex-w flex-t m-b-12">
+                    <div class="header-cart-item-txt p-t-8">
+                        <span class="header-cart-item-info">
+                            ◈
+                        </span>
+                        
+                    </div>
+                    <div class="header-cart-item-info">
+                        <img src="{{rs.product.image.url}}" alt="IMG">
+                    </div>
+
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="/user/product/{{rs.id}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            {{rs.product.title}}
+                        </a>
+
+                        <span class="header-cart-item-info">
+                            {{rs.product.category}}
+                            <br><br><br><br>
+                        </span>
+
+                        
+                        <hr>
+                        
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+        
+    </div>
+</section>
+    
+{% endblock %}
+
+

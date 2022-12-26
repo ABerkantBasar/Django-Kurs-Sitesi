@@ -52,14 +52,11 @@ class Course(models.Model):
     description=models.CharField(max_length=255)
     keywords=models.CharField(max_length=255)
     slug=models.SlugField(null=False,unique=True)
-    image=models.ImageField(blank=True,upload_to='images/')
+    image=models.ImageField(upload_to='images/')
+    video=models.FileField(upload_to='videos/')
     price=models.FloatField()
     status=models.CharField(max_length=10,choices=STATUS)
     detail=RichTextUploadingField()
-
-    #slug=models.SlugField()     #id gibi ama metin 
-    #parent=models.ForeignKey('self',blank=True,null=True,related_name='lesson',on_delete=models.CASCADE)
-
     crate_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now=True)
     
@@ -98,6 +95,19 @@ class Video(models.Model):
     video=models.FileField(upload_to='videos/')
     def __str__(self):
         return self.title
+
+class Slider(models.Model):
+    title=models.CharField(max_length=150)
+    image=models.ImageField(blank=True,upload_to='images/')
+    text1=models.TextField()
+    text2=models.TextField()
+    text3=models.TextField()
+    def __str__(self):
+        return self.title           #geri dönüş
+    
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+    
     
 
 

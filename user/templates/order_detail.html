@@ -1,0 +1,133 @@
+{% extends "homebase.html" %}
+{% load static%}
+{% block title %} Kurs Detayı {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} 
+<link rel="icon" type="image/png" href='{{setting.icon.url}}'/> 
+{% endblock %}
+
+{% block cart %}
+    {% include "cart.html" %}
+{% endblock %}
+
+{% block content %}
+<section class="sec-product-detail bg0 p-t-65 p-b-60">
+	<br><br><br><br><br><br>
+	{% for rs in orders %}
+			{%if product.id == id %}
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6 col-lg-7 p-b-30">
+				<div class="p-l-25 p-r-30 p-lr-0-lg">
+					<div class="wrap-slick3 flex-sb flex-w">
+						<div class="wrap-slick3-dots"></div>
+						<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+						
+						<div class="slick3 gallery-lb">
+							
+							<div class="item-slick3" data-thumb="{{rs.product.image.url}}">
+								<div class="wrap-pic-w pos-relative">
+									
+									<img src="{{rs.product.image.url}}" alt="IMG-PRODUCT">
+
+									<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{rs.product.image.url}}">
+										<i class="fa fa-expand"></i>
+									</a>
+								</div>
+							</div>
+							{% for i in images %}
+							<div class="item-slick3" data-thumb="{{i.image.url}}">
+								<div class="wrap-pic-w pos-relative">
+									<img src="{{i.image.url}}" alt="IMG-PRODUCT">
+
+									<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{i.image.url}}">
+										<i class="fa fa-expand"></i>
+									</a>
+								</div>
+							</div>
+							{%endfor%}
+
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			{%else%}
+			{%endif%}
+			<div class="col-md-6 col-lg-5 p-b-30">
+				<div class="p-r-50 p-t-5 p-lr-0-lg">
+					<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+						{{rs.product.title}}
+					</h4>
+
+					<span class="mtext-106 cl2">
+						{{rs.product.price}} TL
+					</span>
+
+					<p class="stext-102 cl3 p-t-23">
+						{{rs.product.description}}
+					</p>
+
+
+					<!--  -->
+					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+
+						<a href="{{ setting.facebook }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook"target="_blank">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="{{ setting.twitter }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter"target="_blank">
+							<i class="fa fa-twitter"></i>
+						</a>
+
+						<a href="{{ setting.instagram }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Instagram"target="_blank">
+							<i class="fa fa-instagram"></i>
+						</a>
+						<a href="{{ setting.linkedin }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Linkedin"target="_blank">
+							<i class="fa fa-linkedin"></i>
+						</a>
+						<a href="{{ setting.pinterest }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Pinterest"target="_blank">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bor10 m-t-50 p-t-43 p-b-40">
+			<!-- Tab01 -->
+			<div class="tab01">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item p-b-10">
+						<a class="nav-link" data-toggle="tab" href="#videos" role="tab">Videolar</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content p-t-43">
+					<div class="tab-pane fade show active" id="videos" role="tabpanel">
+						<div class="row">
+							<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+								<video  width="640" height="240" controls>
+									<source src="{{rs.product.video.url}}" type="video/mp4">
+								  </video>
+							</div>
+						</div>
+					</div>
+
+					
+
+				</div>
+			</div>
+		</div><br><br><br><br><br><br>
+		<hr>
+		{%endfor%}
+	</div>
+	
+</section>
+{% endblock %}
+

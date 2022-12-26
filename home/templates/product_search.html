@@ -17,57 +17,43 @@
             <h3 class="ltext-103 cl5">
                 <br><br><br><br>
                 Arama Sonuçları
+                <br><br><br>
             </h3>
         </div>
-
-        <div class="row isotope-grid">
-         
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{rs.category}}">
-                <!-- Block2 -->
-                
-                <div class="block2">
-                    
-                    <table cellpadding="3" width="1200">
-                        <tr>
-                            <th></th><br>
-                            <th></th><br>
-                            <th></th><br>
-                            <th></th><br>
-                        </tr>
+        
+        <div class="header-cart-content flex-w js-pscroll">
+            <ul class="header-cart-wrapitem w-full">
+                {%for rs in product%}
+                <li class="header-cart-item flex-w flex-t m-b-12">
+                    <div class="header-cart-item-txt p-t-8">
+                        <span class="header-cart-item-info">
+                            ◈
+                        </span>
                         
-                        {%for rs in product%}
-                            <tr>
-                                
-                                <td>
-                                    <br><br><br><br>
-                                    <a href="/product/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" ></a>
-                                    <br><br><br><br>
-                                </td>
+                    </div>
+                    <div class="header-cart-item-info">
+                        <img src="{{rs.image.url}}" alt="IMG">
+                    </div>
 
-                                <td>
-                                    <h4 class="product-name"><a href="/product/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h4>
-                                </td>
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="/product/{{rs.id}}/{{rs.slug}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            {{rs.title}}
+                        </a>
 
-                                <td>
-                                    <a href="/category/{{rs.category.id}}/{{rs.category.slug}}">{{rs.category}}</a>
-                                </td>
+                        <span class="header-cart-item-info">
+                            {{rs.category}}
+                        </span>
 
-                                <td>
-                                    <h4>{{rs.price}} TL</h4>
-                                </td>
-                                
-                            </tr>
-                            {% endfor %}
-                            
-                    </table>
-                    
-                </div>
-                
-                
-            </div>
-            
-            
-        </div>
+                        <span class="header-cart-item-info">
+                            {{rs.price}} TL <br><br><br><br>
+                        </span>
+                        
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+        
     </div>
 </section>
 

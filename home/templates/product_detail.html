@@ -12,15 +12,12 @@
     {% include "cart.html" %}
 {% endblock %}
 
-{% block slider %}
-<br><br><br>
-    {% include "slider2.html" %}
-{% endblock %}
 
 {% block content %}
     	<!-- Product Detail -->
     
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+		<br><br><br><br><br><br>
 		<div class="container">
 			<div class="row">
                 {% for rs in product %}
@@ -81,11 +78,16 @@
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
 	
-                                    
-
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Sepete Ekle
+                                    {% if user.id is not None %}
+											
+									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" >
+										<a href="/order/addtocart/{{rs.id}}" style="color: white;">Sepete Ekle</a>
 									</button>
+									{% else %}
+										Bu Ürünü Sepete Ekleyebilmek İçin Giriş Yapmalısınız
+									{% endif %}
+
+									
 								</div>
 							</div>	
 						</div>
@@ -127,6 +129,11 @@
 						<li class="nav-item p-b-10">
 							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Yorumlar ({{comment.count}})</a>
 						</li>
+						
+						<li class="nav-item p-b-10">
+							<a class="nav-link" data-toggle="tab" href="#videos" role="tab">Videolar</a>
+						</li>
+						
 					</ul>
 
 					<!-- Tab panes -->
@@ -149,7 +156,7 @@
 										{%for kom in comment%}
 										<div class="flex-w flex-t p-b-68">
 											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="{{ user.image.url}}" alt="AVATAR">
+												<!--<img src="{{kom.user.image.url}}" alt="AVATAR">-->
 											</div>
 
 											<div class="size-207">
@@ -222,6 +229,24 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="tab-pane fade" id="videos" role="tabpanel">
+							<div class="row">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+									{%if user.id is not None %}
+									<video  width="640" height="240" >
+										<source src="{{rs.video.url}}" type="video/mp4">
+									  </video>
+									{%else%}
+										Videoları Görebilmek İçin Giriş Yapmalısınız
+									{%endif%}
+								</div>
+							</div>
+						</div>
+						
+						
+						
+
 					</div>
 				</div>
 			</div>

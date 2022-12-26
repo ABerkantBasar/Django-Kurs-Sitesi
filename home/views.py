@@ -2,13 +2,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from home.models import Setting, ContactFormMessage, ContactFormu, Comment, CommentForm, UserProfile, FAQ
 from django.contrib import messages
-from product.models import Course,Category,Images
+from product.models import Course,Category,Images,Slider
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,authenticate,login
 from .forms import SearchForm
+from order.views import ShopCart, OrderProduct
 
 
 def index(request):
+    slider=Slider.objects.all()
+    current_user=request.user
     category=Category.objects.all
     setting=Setting.objects.get(pk=1)
     sliderdata=Course.objects.all()[:10]
@@ -16,13 +19,16 @@ def index(request):
     course_data=Course.objects.all().order_by('?')
     course_data_last=Course.objects.all().order_by('-id')[0:4]
 
+    request.session['cart_items']=ShopCart.objects.filter(user_id=current_user.id).count()
+
     context = {'setting': setting, 
                 'page':'home',
                 'sliderdata':sliderdata,
                 'category':category,
                 'selected_category':selected_category,
                 'course_data':course_data,
-                'course_data_last':course_data_last,}
+                'course_data_last':course_data_last,
+                'slider':slider,}
 
     return render(request, 'indexhome.html', context)
 
@@ -78,14 +84,23 @@ def category_products(request,id,slug):
     return render(request,'category.html',context)
 
 def product_details(request,id,slug):
-    
-    user=UserProfile.objects.get(user_id=request.user.id)
-    comment=Comment.objects.filter(product_id=id,status='True')
-    setting=Setting.objects.get(pk=1)
-    category=Category.objects.all()
-    product=Course.objects.filter(pk=id)
-    context={'setting':setting ,'product':product, 'category':category, 'user':user, 'slug':slug,'comment':comment}
-    return render(request,'product_detail.html',context)
+    if request.user.id is not None:
+        orders=OrderProduct.objects.filter(user_id=request.user.id )
+        user=UserProfile.objects.get(user_id=request.user.id)
+        comment=Comment.objects.filter(product_id=id,status='True')
+        setting=Setting.objects.get(pk=1)
+        category=Category.objects.all()
+        product=Course.objects.filter(pk=id)
+        context={'setting':setting ,'product':product, 'category':category, 'user':user, 'slug':slug,'comment':comment}
+        return render(request,'product_detail.html',context)
+    else:
+        comment=Comment.objects.filter(product_id=id,status='True')
+        setting=Setting.objects.get(pk=1)
+        category=Category.objects.all()
+        product=Course.objects.filter(pk=id)
+        context={'setting':setting ,'product':product, 'category':category, 'slug':slug,'comment':comment}
+        return render(request,'product_detail.html',context)
+
 
 @login_required(login_url='/login')
 def addcomment(request,id):

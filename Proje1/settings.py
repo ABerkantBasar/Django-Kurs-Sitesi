@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     
     'product.apps.ProductConfig', #product app ekle
+    'order.apps.OrderConfig',
     'home.apps.HomeConfig',
     'user.apps.UserConfig',
     'django_light',       #home app ekle
