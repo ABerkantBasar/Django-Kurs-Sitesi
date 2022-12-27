@@ -45,7 +45,7 @@ def orders(request):
 
 def order_detail(request,id):
     current_user=request.user
-    orders=OrderProduct.objects.filter(user_id=current_user.id )
+    orders=OrderProduct.objects.filter(user_id=current_user.id)
     user=UserProfile.objects.get(user_id=request.user.id)
     comment=Comment.objects.filter(product_id=id,status='True')
     setting=Setting.objects.get(pk=1)

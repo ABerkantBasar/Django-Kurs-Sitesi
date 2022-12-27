@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Category, Course, Images, Course,Video,Slider
+from product.models import Category, Course, Images, Course,Slider
 from mptt.admin import MPTTModelAdmin,DraggableMPTTAdmin
 from django.utils.html import format_html
 
@@ -76,4 +76,3 @@ admin.site.register(Course,CourseAdmin)
 admin.site.register(Slider,SliderAdmin)
 admin.site.register(Images,ImagesAdmin)
 
-admin.site.register(Video)

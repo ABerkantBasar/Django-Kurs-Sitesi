@@ -88,13 +88,7 @@ class Images(models.Model):
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
-    
 
-class Video(models.Model):
-    title=models.CharField(max_length=150)
-    video=models.FileField(upload_to='videos/')
-    def __str__(self):
-        return self.title
 
 class Slider(models.Model):
     title=models.CharField(max_length=150)
